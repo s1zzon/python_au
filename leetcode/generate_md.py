@@ -5,7 +5,10 @@ head = old.readline()
 head = head.replace('\n', '')
 lower_head = head.lower()
 split_head = lower_head.split(' ')
-new.write('+[' + head + ']' + '(#' + split_head[0] + '-' + split_head[1] + ')\n\n')
+if split_head[2] != '':
+    new.write('+[' + head + ']' + '(#' + split_head[0] + '-' + split_head[1] + '-' + split_head[2] + ')\n\n')
+else:
+    new.write('+[' + head + ']' + '(#' + split_head[0] + '-' + split_head[1] + ')\n\n')
 new.write('##' + head + '\n\n')
 link = old.readline()
 link = link.replace('\n', '')
