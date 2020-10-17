@@ -53,10 +53,11 @@ def main(source, destination):
     text = read_all_lines(source)
     source_for_md = leetcode_maker(text[0], text[1], text[3:])
     new_solution = source_for_md.md_formatted()
-    old_solutions = read_full(destintation)
+    old_solutions = read_full(destination)
     result = merge(old_solutions, new_solution)
     write_md(destination, result)
 
 
 if __name__ == '__main__':
-    main(source_leetcode_data.txt, check.md)
+    main(r"C:\Users\User\Desktop\python\source_leetcode_data.txt", r"C:\Users\User\Desktop\python\check.md")
+
