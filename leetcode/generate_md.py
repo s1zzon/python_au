@@ -1,4 +1,4 @@
-separator = '<-----solution----->'
+separator = '<!-----solution----->'
 
 class leetcode_maker:
     def __init__(self, title, link, code):
@@ -13,7 +13,7 @@ class leetcode_maker:
         return '## {}'.format(self.title)
 
     def md_link(self):
-        return '+ [{}](#{})'.format(self.title, self.link[9:-1])
+        return '+ [{}](#{})'.format(self.title, self.link[30:-1])
 
     def md_code(self):
         return '```python\n{}\n```'.format('\n.'.join(map(lambda x : x.rstrip('\n')[4:], self.code)))
@@ -59,4 +59,4 @@ def main(source, destination):
 
 
 if __name__ == '__main__':
-    main(r"C:\Users\User\Desktop\python\source_leetcode_data.txt", r"C:\Users\User\Desktop\python\check.md")
+    main(r"C:\Users\User\Desktop\python\source_leetcode_data.txt", r"C:\Users\User\Desktop\python\math.md")
