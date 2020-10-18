@@ -60,4 +60,4 @@ def main(source, destination):
 
 
 if __name__ == '__main__':
-    main(r"C:\Users\User\Desktop\python\source_leetcode_data.txt", r"C:\Users\User\Desktop\python\math.md")
+    main(r"C:\Users\User\Desktop\python\source_leetcode_data.txt", r"C:\Users\User\Desktop\python\array.md")
