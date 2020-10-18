@@ -1,5 +1,6 @@
 separator = '<!-----solution----->'
 
+
 class leetcode_maker:
     def __init__(self, title, link, code):
         self.title = title.rstrip('\n').split('. ')[1]
