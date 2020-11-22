@@ -63,6 +63,8 @@ def main(source, destination):
     lines = get_all_lines_from_file(source)
     max_square = 0
     for i in range(len(lines)):
+        if len(lines[i].split(' ')) != 6:
+            continue
         triangle = create_triangle(lines[i])
         if triangle.is_this_triangle_exists() is True and triangle.is_this_triangle_isosceles() is True:
             square = triangle.square()
