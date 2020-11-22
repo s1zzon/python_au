@@ -1,4 +1,4 @@
-#import sys
+import sys
 
 
 def get_all_lines_from_file(file_name):
@@ -74,5 +74,4 @@ def main(source, destination):
 
 
 if __name__ == '__main__':
-    main(r"C:\Users\User\PycharmProjects\python_au\triangle\in.txt",
-         r"C:\Users\User\PycharmProjects\python_au\triangle\out.txt")
+    main(sys.argv[1], sys.argv[2])
