@@ -1,5 +1,4 @@
-import math
-import sys
+#import sys
 
 
 def get_all_lines_from_file(file_name):
@@ -15,7 +14,7 @@ class Point:
 
 
 def length(first_point, second_point):
-    return math.sqrt((first_point.X - second_point.X) ** 2 + (first_point.Y - second_point.Y) ** 2)
+    return ((first_point.X - second_point.X) ** 2 + (first_point.Y - second_point.Y) ** 2) ** 0.5
 
 
 class Triangle:
@@ -31,16 +30,16 @@ class Triangle:
             return False
 
     def is_this_triangle_exists(self):
-        if (max(self.l1, self.l2, self.l3) < self.l1 + self.l2 and
-                max(self.l1, self.l2, self.l3) < self.l2 + self.l3 and
-                max(self.l1, self.l2, self.l3) < self.l1 + self.l3):
-            return False
-        else:
+        lengths = [self.l1, self.l2, self.l3]
+        lengths = sorted(lengths)
+        if lengths[2] < lengths[0] + lengths[1]:
             return True
+        else:
+            return False
 
     def square(self):
         p = (self.l1 + self.l2 + self.l3) / 2
-        s = math.sqrt(p * (p - self.l2) * (p - self.l2) * (p - self.l3))
+        s = (p * (p - self.l2) * (p - self.l2) * (p - self.l3)) ** 0.5
         return s
 
 
@@ -49,7 +48,7 @@ def create_triangle(line):
     p1 = Point(line)
     line = ' '.join(line.split(' ')[2:])
     p2 = Point(line)
-    line = ' '.join(line.split(' ')[4:])
+    line = ' '.join(line.split(' ')[2:])
     p3 = Point(line)
     return Triangle(p1, p2, p3)
 
@@ -57,22 +56,23 @@ def create_triangle(line):
 def write_to_file(destination, coordinates):
     file = open(destination, "w")
     file.write(coordinates)
-    file.close
+    file.close()
 
 
 def main(source, destination):
     lines = get_all_lines_from_file(source)
     max_square = 0
-    for line in lines:
-        triangle = create_triangle(line)
+    for i in range(len(lines)):
+        triangle = create_triangle(lines[i])
         if triangle.is_this_triangle_exists() is True and triangle.is_this_triangle_isosceles() is True:
             square = triangle.square()
         else:
             square = -1
         max_square = max(square, max_square)
         if square == max_square:
-            write_to_file(destination, line)
+            write_to_file(destination, lines[i])
 
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    main(r"C:\Users\User\PycharmProjects\python_au\triangle\in.txt",
+         r"C:\Users\User\PycharmProjects\python_au\triangle\out.txt")
