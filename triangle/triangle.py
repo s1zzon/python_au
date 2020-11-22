@@ -52,3 +52,27 @@ def create_triangle(line):
     line = ' '.join(line.split(' ')[4:])
     p3 = Point(line)
     return Triangle(p1, p2, p3)
+
+
+def write_to_file(destination, coordinates):
+    file = open(destination, "w")
+    file.write(coordinates)
+    file.close
+
+
+def main(source, destination):
+    lines = get_all_lines_from_file(source)
+    max_square = 0
+    for line in lines:
+        triangle = create_triangle(line)
+        if triangle.is_this_triangle_exists() is True and triangle.is_this_triangle_isosceles() is True:
+            square = triangle.square()
+        else:
+            square = -1
+        max_square = max(square, max_square)
+        if square == max_square:
+            write_to_file(destination, line)
+
+
+if __name__ == '__main__':
+    main(sys.argv[1], sys.argv[2])
