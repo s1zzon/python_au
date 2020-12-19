@@ -1,12 +1,13 @@
 import sys
 
+
 class Node:
     def __init__(self, val):
         self.val = val
         self.next = None
 
-class LinkedList:
 
+class LinkedHexNumber:
     def __init__(self, num):
         self.len = len(num)
         a = Node(num[0])
@@ -15,7 +16,7 @@ class LinkedList:
             a.next = Node(num[i])
             a = a.next
 
-    def convert(self):
+    def from_hex_to_decimal(self):
         letters = ['A', 'B', 'C', 'D', 'E', 'F']
         a = self.head
         for i in range(self.len):
@@ -26,7 +27,7 @@ class LinkedList:
             a = a.next
         return self
 
-    def reconvert(self):
+    def from_decimal_to_hex(self):
         letters = ['A', 'B', 'C', 'D', 'E', 'F']
         a = self.head
         for i in range(self.len):
@@ -35,44 +36,25 @@ class LinkedList:
             a = a.next
         return self
 
-    def add(self, second):
-        self = self.convert()
-        second = second.convert()
+    def sum(self, second):
+        first = self.from_hex_to_decimal()
+        second = second.from_hex_to_decimal()
         if self.len < second.len:
-            first = second
-            second = self
-        else:
-            first = self
+            first, second = second, first
         len = second.len
-        a = first
+        sum = first
         first = first.head
         second = second.head
         for i in range(len):
             if first.val + second.val <= 15:
                 first.val = first.val + second.val
             else:
-                sum = first.val + second.val
-                sum -= 16
-                if i is (a.len - 1):
-                    A = Node(0)
-                    first.next = A
-                    a.len += 1
-                first.next.val += 1
-                if first.next.val >= 16:
-                    x = first.next
-                    while x.val >= 16:
-                        x.val -= 16
-                        if x.next is None:
-                            x.next = Node(0)
-                            a.len += 1
-                        x.next.val += 1
-                        x = x.next
-                first.val = sum
+                first.val = first.val + second.val
+                first.next.val, first.val = first.next.val + 1, first.val - 16
             first = first.next
             second = second.next
-
-        a = a.reconvert()
-        return a
+        sum = sum.from_decimal_to_hex()
+        return sum
 
     def __str__(self):
         res = ""
@@ -82,18 +64,21 @@ class LinkedList:
             res = res + a.val
             a = a.next
         res = res[::-1]
+        if res[0] == '0':
+            res = res[1:]
         return res
 
 
 def main(first, second):
+    buff = '0'
+    first = buff + first
     second = second[::-1]
     first = first[:: -1]
-    first = LinkedList(first)
-    second = LinkedList(second)
-    first = first.add(second)
+    first = LinkedHexNumber(first)
+    second = LinkedHexNumber(second)
+    first = first.sum(second)
     print(first)
 
 
 if __name__ == '__main__':
-    hexnumber = sys.argv
-    main(hexnumber[1], hexnumber[2])
+    main(sys.argv[1], sys.argv[2])
