@@ -1,7 +1,7 @@
 separator = '<!-----solution----->'
 
 
-class leetcode_maker:
+class MdMaker:
     def __init__(self, title, link, code):
         self.title = title.rstrip('\n').split('. ')[1]
         self.link = link.rstrip('\n')
@@ -52,7 +52,7 @@ def merge(old_solution, new_solution):
 
 def main(source, destination):
     text = read_all_lines(source)
-    source_for_md = leetcode_maker(text[0], text[1], text[3:])
+    source_for_md = MdMaker(text[0], text[1], text[3:])
     new_solution = source_for_md.md_formatted()
     old_solutions = read_full(destination)
     result = merge(old_solutions, new_solution)
