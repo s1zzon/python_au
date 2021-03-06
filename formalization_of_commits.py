@@ -4,8 +4,8 @@ import json
 
 PREFIX = ['LEETCODE', 'GENERATOR', 'TRIANGLE', 'HEXNUMBER', 'REQUESTS']
 GROUP = '1013'
-ACTION = ['Added', 'Deleted']
-TOKEN = '138eb55f3d1f8a362af9b152d5541c3d0eb4bc93'
+ACTION = ['Added', 'Deleted', 'Updated']
+TOKEN = ''
 
 
 headers = {'Authorization': 'token ' + TOKEN}
