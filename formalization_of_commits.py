@@ -6,7 +6,7 @@ import datetime
 PREFIX = ['LEETCODE', 'GENERATOR', 'TRIANGLE', 'HEXNUMBER', 'REQUESTS']
 GROUP = '1013'
 ACTION = ['Added', 'Deleted', 'Updated']
-TOKEN = 'dee35d2041609fce38e66405d0cd7ce57a14ecc8'
+TOKEN = ''
 
 
 headers = {'Authorization': 'token ' + TOKEN}
