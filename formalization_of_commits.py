@@ -1,22 +1,47 @@
 import requests
 import json
+import datetime
 
 
 PREFIX = ['LEETCODE', 'GENERATOR', 'TRIANGLE', 'HEXNUMBER', 'REQUESTS']
 GROUP = '1013'
 ACTION = ['Added', 'Deleted', 'Updated']
-TOKEN = ''
+TOKEN = 'dee35d2041609fce38e66405d0cd7ce57a14ecc8'
 
 
 headers = {'Authorization': 'token ' + TOKEN}
 
-def get_all_user_pr(userName = 'vladimirdvd', repos = 'python_au', state = 'open'):
+def change_date_format(date):
+    date = date[:-1].replace('T', '-')
+    date = datetime.datetime(date.split['-'])
+    return date
+
+def compare_date(pr):
+    counter = 0
+    date_of_commit = change_date_dormat(pr['commits_url']['commit']['date'])
+    for i in (len(requests.get(pr['url']+'/comments').json) - 1):
+      if pr['url'+'/comments'][i+1][body][:19] == 'VERIFICATION RESULT':
+          date_of_comment = change_date_format(pr['url'+'/comments'][i]['created_at'])
+          delta = date_of_commit - date_of_comment
+          if delta.second < 0:
+              counter += 1
+    if counter > 0:
+        return True
+    else:
+        return False        
+
+
+def get_all_user_pr(userName = 'vladimirdvd', repos = 'python_au', state = 'all'):
     all_prs = requests.get("https://api.github.com/repos/{}/{}/pulls?state={}".format(userName, repos, state), headers = headers).json()
     return all_prs
 
 def get_all_pr_commits(pr):    
     list_of_commits = requests.get(pr['commits_url'], headers = headers).json()
+#    print(pr['commits_url'])
     return list_of_commits
+
+def get_all_comments():
+    pr[review]
 
 def get_title(dictionary):
     return dictionary['commit']['message']
@@ -40,7 +65,7 @@ def check_prefixes(title):
     return title_errors
 
 def create_pr_comment(title, title_errors):
-    return('Hello! \n I am here to help you with making your pr title looks better. Now it is: \n {} \n Mistakes: \n {} '.format(title, title_errors))
+    return 'VERIFICATION RESULT : \n Hello! \n I am here to help you with making your commit title looks better. Now it is: \n {} \n Mistakes: \n {} '.format(title, title_errors)
 
 def send_pr_comment(pr, comment):
     data = {'body': comment,
@@ -48,19 +73,22 @@ def send_pr_comment(pr, comment):
             'position': 1,
             'commit_id': pr['head']['sha']}
     r = requests.post(pr['url']+'/comments', headers=headers, json=data)
-    print(r.json())
+#    print(r.json())
 
-def bully_your_pull_request(pr):
+def verify_pull_request(pr):
     commits = get_all_pr_commits(pr)
-    for commit in commits:
-        title = get_title(commit)
-        title_errors = check_prefixes(title)
-        comment = create_pr_comment(title, title_errors)
-        send_pr_comment(pr, comment)
+    if compare_date == True:
+        for commit in commits:
+            title = get_title(commit)
+            title_errors = check_prefixes(title)
+            comment = create_pr_comment(title, title_errors)
+ #           print(comment)
+            send_pr_comment(pr, comment)
 
 def main():
     for pr in get_all_user_pr(userName = 'vladimirdvd'):
-      bully_your_pull_request(pr)
+        print(pr['url']+'/comments')
+        verify_pull_request(pr)
 
 if __name__ == '__main__':
     main()
