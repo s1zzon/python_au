@@ -1,5 +1,5 @@
 from datetime import datetime
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import sys
 
 
@@ -32,6 +32,7 @@ def sort_data(data, sort_key):
 def make_plot(data, ordinate_key, abscissa_key='date', data_filter=None):
     ordinate = []
     abscissa = []
+    data = sort_data(data, abscissa_key)
     if data_filter is not None:
         for one_data_filter in data_filter.split(','):
             key = one_data_filter.split('=')[0]
@@ -54,10 +55,10 @@ def make_plot(data, ordinate_key, abscissa_key='date', data_filter=None):
 def main(file_name):
     data_str = open_file(file_name)
     data = create_list_of_dicts(data_str)
-    make_plot(data, sys.argv[1], sys.argv[2], sys.argv[3])
+    make_plot(data, sys.argv[2], sys.argv[3], sys.argv[4])
 
 
 # To run program you should write '....txt' 'ordinate_key' 'abscissa_key' 'data_filter'
 # Format of data_filter is key1=value1,key2=value2,...
 if __name__ == '__main__':
-    main('input.txt')
+    main(sys.argv[1])
