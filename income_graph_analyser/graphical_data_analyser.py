@@ -55,11 +55,11 @@ def make_plot(data, ordinate_key, abscissa_key='date', data_filter=''):
 def main(file_name):
     data_str = open_file(file_name)
     data = create_list_of_dicts(data_str)
-    data = prepare_data(data, sys.argv[3])
-    make_plot(data, sys.argv[1], sys.argv[2])
+    data = prepare_data(data, sys.argv[4])
+    make_plot(data, sys.argv[2], sys.argv[3])
 
 
 # To run program you should write '....txt' 'ordinate_key' 'abscissa_key' 'data_filter'
 # Format of data_filter is key1=value1,key2=value2,...
 if __name__ == '__main__':
-    main('input.txt')
+    main(sys.argv[1])
