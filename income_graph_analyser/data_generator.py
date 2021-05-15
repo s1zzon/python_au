@@ -1,5 +1,8 @@
-from random import randint
+from random import randint, choice
+
 HEADERS_LIST = ['date', 'resource', 'staff_id', 'count']
+STAFF = ['Rodion', 'Natalia', 'Nikita', 'Ilya', 'Anna', 'Alia',
+         'Vladimir', 'Semen', 'Alina', 'Svyatoslav', 'Polina']
 NUMBER_OF_COLUMNS = 4
 N = 100
 
@@ -16,7 +19,7 @@ class GenerateDataByColumns:
 
     def generate_staff_id(self):
         self.is_not_used()
-        return '{}'.format(randint(1, 42))
+        return '{}'.format(choice(STAFF))
 
     def generate_count(self):
         self.is_not_used()
@@ -34,6 +37,8 @@ def main():
     headers = ''
     for i in range(NUMBER_OF_COLUMNS):
         headers += HEADERS_LIST[i]
+        if i != NUMBER_OF_COLUMNS - 1:
+            headers += ', '
     data = headers + '\n'
     for _ in range(N):
         data_row = str(GenerateDataByColumns()) + '\n'

@@ -38,15 +38,15 @@ def prepare_data(data, data_filter=None):
 def make_plot(data, ordinate_key, abscissa_key='date', data_filter=''):
     ordinate = []
     abscissa = []
+
     for data_row in data:
         ordinate.append(data_row[ordinate_key])
         abscissa.append(data_row[abscissa_key])
-    if abscissa_key == 'date':
-        abscissa = list(map(lambda x: str(x)[0:7], abscissa))
 
     plt.title('{}({})'.format(ordinate_key, abscissa_key))
     plt.xlabel(abscissa_key)
     plt.ylabel(ordinate_key)
+    plt.ylim([min(abscissa) - 1, max(abscissa) + 1])
     plt.plot(abscissa, ordinate)
     plt.savefig('plot {}({}): {}.png'.format(ordinate_key, abscissa_key, data_filter))
     plt.show()
