@@ -7,7 +7,45 @@
 + [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
 + [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
 + [Linked List Cycle II](#linked-list-cycle-ii)
++ [Merge k Sorted Lists](#merge-k-sorted-lists/submissions)
 <!-----solution----->
+
+## Merge k Sorted Lists
+
+https://leetcode.com/problems/merge-k-sorted-lists/submissions/
+
+```python
+def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+    if not lists:
+        return None
+    if len(lists) == 1:
+        return lists[0]
+    head = point = ListNode()
+    if not any(lists):
+        return head.next
+    is_it_end = False
+    
+    while is_it_end is False:
+        header_values = []
+        for linked_list in lists:
+            if linked_list is not None:
+                header_values.append(linked_list.val)
+        if header_values == []:
+            return head.next
+        point.next = ListNode(min(header_values))
+        point = point.next
+            
+        if len(header_values) != 1:
+            lists[header_values.index(min(header_values))] = lists[header_values.index(min(header_values))].next
+        else:
+            is_it_end = True
+
+    return head.next
+            
+        
+    
+    
+```
 
 ## Linked List Cycle II
 
